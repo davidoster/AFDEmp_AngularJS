@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body>
+    <h3>AngularJS Select Boxes</h3>
+    <hr>
+    <h3>Dropdowns made with ng-options allows the selected value to be an object, while dropdowns made from ng-repeat has to
+        be a string.
+    </h3>
+    <p>This example shows how to fill a dropdown list using the ng-options an ng-repeat directive.</p>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <p>With ng-options:</p>
+        <select ng-model="selectedName" ng-options="x for x in names">
+        </select>
+
+        <p>With ng-repeat:</p>
+        <select ng-model="selectedCar">
+            <option ng-repeat="x in cars" value="{{x.model}}">{{x.model}}</option>
+        </select>
+        <h1>You selected: {{selectedCar}}</h1>
+
+        <p>With ng-options again:</p>
+        <select ng-model="selectedCar2" ng-options="x.model for x in cars">
+        </select>
+        <h1>You selected: {{selectedCar2.model}}</h1>
+        <p>Its color is: {{selectedCar2.color}}</p>
+
+        <p>With ng-options once more:</p>
+        <!-- Using an object as the data source, x represents the key, and y represents the value: -->
+        <select ng-model="selectedCar3" ng-options="x for (x, y) in cars2">
+        </select>
+
+        <h1>You selected: {{selectedCar3}}</h1>
+
+        <p>Select a car:</p>
+        <!-- The options in the dropdown list does not have to be the key in a key-value pair, it can also be the value, or a property
+of the value object: -->
+        <select ng-model="selectedCar4" ng-options="y.brand for (x, y) in cars3">
+        </select>
+
+        <h1>You selected: {{selectedCar4.brand}}</h1>
+        <h2>Model: {{selectedCar4.model}}</h2>
+        <h3>Color: {{selectedCar4.color}}</h3>
+
+        <p>Note that the selected value represents an object.</p>
+    </div>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.names = ["Emil", "Tobias", "Linus"],
+                $scope.cars = [{
+                        model: "Ford Mustang",
+                        color: "red"
+                    },
+                    {
+                        model: "Fiat 500",
+                        color: "white"
+                    },
+                    {
+                        model: "Volvo XC90",
+                        color: "black"
+                    }
+                ],
+                $scope.cars2 = {
+                    car01: "Ford",
+                    car02: "Fiat",
+                    car03: "Volvo"
+                },
+                $scope.cars3 = {
+                    car01: {
+                        brand: "Ford",
+                        model: "Mustang",
+                        color: "red"
+                    },
+                    car02: {
+                        brand: "Fiat",
+                        model: "500",
+                        color: "white"
+                    },
+                    car03: {
+                        brand: "Volvo",
+                        model: "XC90",
+                        color: "black"
+                    }
+                };
+        });
+    </script>
+</body>
+
+</html>

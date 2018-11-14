@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-app="" ng-init="mySwitch=true;hour=13">
+    <h3>AngularJS HTML DOM</h3>
+    <hr>
+    <div>
+        <p>
+            <button ng-disabled="mySwitch">Click Me!</button>
+        </p>
+        <p>
+            <input type="checkbox" ng-model="mySwitch" />Button
+        </p>
+        <p>
+            {{ mySwitch }}
+        </p>
+    </div>
+    <div>
+        <p ng-show="true">I am visible show.</p>
+        <p ng-show="false">I am not visible show.</p>
+        <p ng-show="hour > 12">I am visible hour > 12.</p>
+        <p ng-hide="true">I am not visible hide.</p>
+        <p ng-hide="false">I am visible hide.</p>
+    </div>
+</body>
+
+</html>

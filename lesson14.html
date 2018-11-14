@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body>
+    <h3>AngularJS Events</h3>
+    <!-- You can add AngularJS event listeners to your HTML elements by using one or more of these directives: 
+    ng-blur
+    ng-change 
+    ng-click 
+    ng-copy 
+    ng-cut 
+    ng-dblclick 
+    ng-focus 
+    ng-keydown 
+    ng-keypress 
+    ng-keyup 
+    ng-mousedown 
+    ng-mouseenter 
+    ng-mouseleave
+    ng-mousemove 
+    ng-mouseover 
+    ng-mouseup 
+    ng-paste 
+    The event directives allows us to run AngularJS functions at certain user events.
+    An AngularJS event will not overwrite an HTML event, both events will be executed. -->
+    <hr>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <h1 ng-mousemove="count = count + 1">Mouse Over Me!</h1>
+        <h2>{{ count }}</h2>
+
+        <button ng-click="count1 = count1 + 1">Click me!</button>
+        <p>{{ count1 }}</p>
+
+        <button ng-click="myFunction()">Click me!</button>
+        <p>{{ count2 }}</p>
+
+        <button ng-click="myFunc()">Click Me!</button>
+        <div ng-show="showMe">
+            <h1>Menu:</h1>
+            <div>Pizza</div>
+            <div>Pasta</div>
+            <div>Pesce</div>
+        </div>
+
+        <h1 ng-mousemove="myFunc2($event)">Mouse Over Me!</h1>
+        <p>Coordinates: {{x + ', ' + y}}</p>
+
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.count = 0;
+            $scope.count1 = 0;
+            $scope.count2 = 0;
+            $scope.myFunction = function () {
+                $scope.count2++;
+            }
+            $scope.showMe = false;
+            $scope.myFunc = function () {
+                $scope.showMe = !$scope.showMe;
+            }
+            $scope.myFunc2 = function (myE) {
+                $scope.x = myE.clientX;
+                $scope.y = myE.clientY;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+    <script src="angular-route.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS Routing</h3>
+    <hr>
+    <!-- The ngRoute module helps your application to become a Single Page Application. 
+        What is Routing in AngularJS? 
+        If you want to navigate to different pages in your application, but you also want the application to be a SPA (Single Page Application),
+    with no page reloading, you can use the ngRoute module. 
+    The ngRoute module routes your application to different pages without reloading the entire application. -->
+
+    <p>
+        <a href="#/!">Main</a>
+    </p>
+
+    <a href="#!red">Red</a>
+    <a href="#!green">Green</a>
+    <a href="#!blue">Blue</a>
+    <a href="#!london">City 1</a>
+    <a href="#!paris">City 2</a>
+    <a href="#!banana">Banana</a>
+    <a href="#!tomato">Tomato</a>
+
+    <div ng-view></div>
+    <!-- Other ways for the same viewing -->
+    <!-- <ng-view></ng-view> -->
+    <!-- <div class="ng-view"></div> -->
+    <p>Click on the links to navigate to "red.htm", "green.htm", "blue.htm", or back to "main.htm"</p>
+
+    <script>
+        var app = angular.module("myApp", ["ngRoute"]);
+        app.config(function ($routeProvider) {
+            // With the $routeProvider you can define what page to display when a user clicks a link.
+            // With the $routeProvider you can also define a controller for each "view".
+            // You can also use the template property, which allows you to write HTML directly in the property value, and not refer to a page.
+            $routeProvider
+                .when("/", {
+                    templateUrl: "main.html"
+                })
+                .when("/red", {
+                    templateUrl: "red.html"
+                })
+                .when("/green", {
+                    templateUrl: "green.html"
+                })
+                .when("/blue", {
+                    templateUrl: "blue.html"
+                })
+                .when("/london", {
+                    templateUrl: "london.html",
+                    controller: "londonCtrl"
+                })
+                .when("/paris", {
+                    templateUrl: "paris.html",
+                    controller: "parisCtrl"
+                })
+                .when("/banana", {
+                    template: "<h1>Banana</h1><p>Bananas contain around 75% water.</p>"
+                })
+                .when("/tomato", {
+                    template: "<h1>Tomato</h1><p>Tomatoes contain around 95% water.</p>"
+                })
+                .otherwise({
+                    template: "<h1>None</h1><p>Nothing has been selected</p>"
+                });
+        });
+        app.controller("londonCtrl", function ($scope) {
+            $scope.msg = "I love London";
+        });
+        app.controller("parisCtrl", function ($scope) {
+            $scope.msg = "I love Paris";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS Includes</h3>
+    <hr>
+    <div ng-include="'myFile.html'" ng-controller="customersCtrl"></div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        /*app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("https://www.w3schools.com/angular/customers.php").then(function (response) {
+                $scope.names = response.data.records;
+            });
+        });*/
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("customers.txt").then(function (response) {
+                $scope.names = response.data.records;
+            });
+        });
+    </script>
+</body>
+
+</html>

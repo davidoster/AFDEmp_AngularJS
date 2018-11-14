@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+<body ng-app="myApp" >
+    <h3>AngularJS API</h3>
+    <hr>
+    <div ng-controller="myCtrl">
+        <p>{{ x1 }}</p>
+        <p>{{ x2 }}</p>
+        <p>{{ x3 }}</p>
+        <p>{{ x4 }}</p>
+        <p>{{ x5 }}</p>
+        <p>{{ x6 }}</p>
+    </div>
+    
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.x1 = "JOHN";
+            $scope.x2 = angular.lowercase($scope.x1);
+            $scope.x3 = "Nikos";
+            $scope.x4 = angular.uppercase($scope.x3);
+            $scope.x5 = angular.isString($scope.x4);
+            $scope.x6 = angular.isNumber($scope.x3);
+        });
+    </script>
+</body>
+</html>

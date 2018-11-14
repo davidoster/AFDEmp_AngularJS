@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+    <style>
+        input.ng-invalid {
+            background-color: lightblue;
+        }
+
+        /* The ng-model directive adds/removes the following classes, according to the status of the form field: 
+    ng-empty 
+    ng-not-empty
+    ng-touched 
+    ng-untouched 
+    ng-valid 
+    ng-invalid 
+    ng-dirty 
+    ng-pending 
+    ng-pristine */
+    </style>
+</head>
+
+<body>
+    <h3>AngularJS Model</h3>
+    <hr>
+    <div ng-app="myApp" ng-controller="myCtrl" ng-init="myText = 'post@myweb.com'">
+        <form name="myForm">
+            Name:
+            <input ng-model="name">
+            <h1>You entered: {{name}}</h1>
+            <p>Change the name inside the input field, and you will see the name in the header changes accordingly.</p>
+            <hr/> E-mail:
+            <input type="email" name="myAddress" ng-model="myText">
+            <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
+            <h1>Status</h1>
+            {{(myForm.myAddress.$valid)?"Valid email":"Not valid email"}}, {{(myForm.myAddress.$dirty)?"Email value has been changed":"Email
+            value has not been changed"}}, {{(myForm.myAddress.$touched)?"Email field had focus":"Email field had no focus"}}
+        </form>
+    </div>
+
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl', function ($scope) {
+            $scope.name = "John Doe";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid grey;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        /* table tr:nth-child(odd) {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        } */
+    </style>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS Tables</h3>
+
+    <hr>
+    <div ng-controller="customersCtrl">
+        <table>
+            <thead>
+                <th>No</th><th>Name</th><th>City</th><th>Country</th>
+            </thead>
+            <tr ng-repeat="x in names | orderBy : 'Country'" ">
+                <td>{{ $index + 1 }}</td>
+                <td ng-if="$odd " style="background-color:#f1f1f1 ">{{ x.Name }}</td>
+                <td ng-if="$even ">{{ x.Name }}</td>
+                <td ng-if="$odd " style="background-color:#f1f1f1 ">{{ x.City | uppercase }}</td>
+                <td ng-if="$even ">{{ x.City }}</td>
+                <td ng-if="$odd " style="background-color:#f1f1f1 ">{{ x.Country | uppercase }}</td>
+                <td ng-if="$even ">{{ x.Country }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var app = angular.module('myApp', []);
+        /*app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("https://www.w3schools.com/angular/customers.php ")
+                .then(function (response) { $scope.names = response.data.records; });
+        });*/
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("customers.txt")
+                .then(function (response) { $scope.names = response.data.records; });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS Directives</h3>
+    <hr>
+    <div ng-init="quantity=1;cost=5;
+    firstName1='Κώστας';
+    lastName1='Αρμενόπουλος';
+    person={firstName:'Μαρία',lastName:'Παπαδοπούλου'};
+    points=[1,15,19,2,40];
+    names=[ {name:'Jani',country:'Norway'}, {name:'Hege',country:'Sweden'}, {name:'Kai',country:'Denmark'}]">
+
+        <p>Total in euro: {{ quantity * cost }}</p>
+        <p>Total in euro:
+            <span ng-bind="quantity * cost"></span>
+        </p>
+        <p>The name is {{ firstName1 + " " + lastName1 }}</p>
+        <p>(Other way) The name is
+            <span ng-bind="firstName1 + ' ' + lastName1"></span>
+        </p>
+        <p>The other name is {{ person.lastName }}</p>
+        <p>(Other way) The other name is
+            <span ng-bind="person.lastName"></span>
+        </p>
+        <p>The third result is {{ points[2] }}</p>
+        <p>(Other way) The third result is
+            <span ng-bind="points[2]"></span>
+        </p>
+        <ul>
+            <li ng-repeat="x in names">
+                {{ x.name + ', ' + x.country }}
+            </li>
+        </ul>
+
+    </div>
+    <hr/>
+    <w3-test-directive-1></w3-test-directive-1>
+    <hr/>
+    <div w3-test-directive-2></div>
+    <hr/>
+    <div class="w3-test-directive-3"></div>
+    <p>
+        <strong>Note:</strong> You must add the value "C" to the restrict property to be able to invoke the directive from a class
+        name.
+    </p>
+    <hr/>
+    <!-- directive: w3-test-directive-4 -->
+    <p>
+        <strong>Note:</strong> We've added the
+        <strong>replace</strong> property in this example, otherwise the comment would be invisible.</p>
+
+    <p>
+        <strong>Note:</strong> You must add the value "M" to the
+        <strong>restrict</strong> property to be able to invoke the directive from a comment.</p>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.directive("w3TestDirective1", function () {
+            return {
+                template: "<h1>Made by a directive as tag!</h1>"
+            };
+        });
+        app.directive("w3TestDirective2", function () {
+            return {
+                template: "<h1>Made by a directive as element attribute!</h1>"
+            };
+        });
+        app.directive("w3TestDirective3", function () {
+            return {
+                restrict: "C",
+                template: "<h1>Made by a directive as class element!</h1>"
+            };
+        });
+        app.directive("w3TestDirective4", function () {
+            return {
+                restrict: "M",
+                replace: true,
+                template: "<h1>Made by a directive as comment!</h1>"
+            };
+        });
+
+        //  The legal restrict values are:
+        //  E for Element name
+        //  A for Attribute
+        //  C for Class
+        //  M for Comment
+        // By default the value is EA, meaning that both Element names and attribute names can invoke the directive.
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS Includes Cross Domains</h3>
+    <hr>
+     <!-- Be sure that the server on the destination allows cross domain file access. -->
+    <div ng-include="'https://tryit.w3schools.com/angular_include.php'"></div>
+
+    <script>
+        // try to comment the following lines within the script
+        var app = angular.module('myApp', []);
+        app.config(function ($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+                'https://tryit.w3schools.com/**'
+            ]);
+        });
+    </script>
+</body>
+
+</html>

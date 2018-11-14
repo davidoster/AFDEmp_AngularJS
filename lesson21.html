@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <!--https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/-->
+    <script src="angular.min.js"></script>
+    
+    <!--https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/-->
+    <link rel="stylesheet" href="bootstrap.min.css">
+    
+    <!--https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/-->
+    <script src="jquery.min.js"></script>
+    
+    <!--https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/-->
+    <script src="bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div ng-app="myShoppingList" ng-cloak ng-controller="myCtrl" class="container-fluid" style="max-width:500px;">
+        <div class="jumbotron">
+            <h3>My Shopping List</h3>
+        </div>
+        <ul class="list-group">
+            <li ng-repeat="x in products" class="list-group-item">{{x}}
+                <span ng-click="removeItem($index)" style="cursor:pointer;">×</span>
+            </li>
+        </ul>
+        <div class="form-group">
+            <input placeholder="Add shopping items here" ng-model="addMe" class="form-control">
+            <button ng-click="addItem()" class="btn btn-default">Add</button>
+        </div>
+        <p class="alert alert-info">{{errortext}}</p>
+    </div>
+
+    <script>
+        var app = angular.module("myShoppingList", []);
+        app.controller("myCtrl", function ($scope) {
+            $scope.products = ["Milk", "Bread", "Cheese"];
+            $scope.addItem = function () {
+                $scope.errortext = "";
+                if (!$scope.addMe) {
+                    return;
+                }
+                if ($scope.products.indexOf($scope.addMe) == -1) {
+                    $scope.products.push($scope.addMe);
+                } else {
+                    $scope.errortext = "The item is already in your shopping list.";
+                }
+            }
+            $scope.removeItem = function (x) {
+                $scope.errortext = "";
+                $scope.products.splice(x, 1);
+            }
+        });
+    </script>
+</body>
+
+</html>

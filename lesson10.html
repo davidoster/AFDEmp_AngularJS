@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.min.js"></script>
+</head>
+
+<body ng-app="myApp">
+    <h3>AngularJS HTTP</h3>
+    <!-- The AngularJS $http service makes a request to the server, and returns a response. -->
+
+    <hr>
+    <div ng-controller="myCtrl1">
+        <p>Today's welcome message is:</p>
+        <h1>{{ myWelcome }}</h1>
+    </div>
+    <p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+    <!-- The example above uses the .get method of the $http service. 
+    The .get method is a shortcut method of the $http service. 
+    There are several shortcut methods: 
+    .delete() 
+    .get() 
+    .head() 
+    .jsonp() 
+    .patch() 
+    .post() 
+    .put() 
+    The methods above are all shortcuts of calling the $http service. -->
+
+    <hr>
+    <div ng-controller="myCtrl2">
+        <p>Other way for Today's welcome message is:</p>
+        <h1>{{ myWelcome }}</h1>
+    </div>
+    <p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+    <!-- The response from the server is an object with these properties: 
+    .config the object used to generate the request. 
+    .data a string, or an object, carrying the response from the server. 
+    .headers a function to use to get header information. 
+    .status a number defining the HTTP status. 
+    .statusText a string defining the HTTP status. -->
+
+    <hr>
+    <div ng-controller="myCtrl3">
+        <p>Data : {{content}}</p>
+        <p>Status : {{statuscode}}</p>
+        <p>StatusText : {{statustext}}</p>
+    </div>
+    <p>The response object has many properties. This example demonstrate the value of the data, status, and statusText properties.</p>
+
+    <hr>
+    <div ng-controller="myCtrl4">
+        <h1>{{content}}</h1>
+    </div>
+    <p>The $http service executes different functions on success and failure.</p>
+
+    <hr>
+    <div ng-controller="customersCtrl">
+        <ul>
+            <li ng-repeat="x in myData">
+                {{ x.Name + ', ' + x.Country }}
+            </li>
+        </ul>
+    </div>
+    <!-- The application defines the customersCtrl controller, with a $scope and $http object. 
+        $http is an XMLHttpRequest object for requesting external data. 
+        $http.get() reads JSON data from https://www.w3schools.com/angular/customers.php. 
+        On success, the controller creates a property, myData, in the scope, with JSON data from the server. 
+    -->
+    <hr>
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myCtrl1', function ($scope, $http) {
+            $http.get("welcome.html")
+                .then(function (response) {
+                    $scope.myWelcome = response.data;
+                });
+        });
+        app.controller('myCtrl2', function ($scope, $http) {
+            $http({
+                method: "GET",
+                url: "welcome.html"
+            }).then(function mySuccess(response) {
+                $scope.myWelcome = response.data;
+            }, function myError(response) {
+                $scope.myWelcome = response.statusText;
+            });
+        });
+        app.controller('myCtrl3', function ($scope, $http) {
+            $http.get("welcome.html")
+                .then(function (response) {
+                    $scope.content = response.data;
+                    $scope.statuscode = response.status;
+                    $scope.statustext = response.statusText;
+                });
+        });
+        app.controller('myCtrl4', function ($scope, $http) {
+            $http.get("wrongfilename.html")
+                .then(function (response) {
+                    $scope.content = response.data;
+                }, function (response) {
+                    $scope.content = "Something went wrong";
+                });
+        });
+        app.controller('customersCtrl', function ($scope, $http) {
+            $http.get("https://www.w3schools.com/angular/customers.php").then(function (response) {
+                $scope.myData = response.data.records;
+            });
+        });
+    </script>
+</body>
+
+</html>
